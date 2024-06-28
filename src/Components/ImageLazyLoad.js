@@ -9,7 +9,7 @@ function ImageLazyLoad({ blurUrl, originalImage }) {
     <>
       <div className="image">
 
-        <img src={imageLoading ? originalImage : blurUrl} onLoad={handelOnLoad} height={"400px"} width={"400px"} alt='this is alt tag' />
+        <img src={imageLoading ? originalImage : blurUrl} onLoad={handelOnLoad} loading='lazy' height={"400px"} width={"400px"} alt='this is alt tag' />
       </div>
 
     </>

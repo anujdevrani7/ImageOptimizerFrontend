@@ -10,11 +10,19 @@ function Contact() {
             try {
                 setLoading(true)
                 const response = await fetch('http://localhost:7000/getimages/contact');
+                console.log("value of the response is  : ",response)
                 const data = await response.json();
+                localStorage.setItem("contact",JSON.stringify(data))
                 setImages(data.data);
                 setLoading(false)
             } catch (error) {
-                console.error('Error fetching images:', error);
+               
+                if(localStorage.getItem("contact")){
+                    const data = JSON.parse(localStorage.getItem("contact"));
+                    setImages(data.data)
+                    setLoading(false)
+                }
+                // console.error('Error fetching images:', error);
             }
         };
 

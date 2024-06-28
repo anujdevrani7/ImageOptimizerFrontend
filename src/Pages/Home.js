@@ -10,18 +10,29 @@ function Home() {
             try {
                 setLoading(true)
                 const response = await fetch('http://localhost:7000/getimages/home');
-                if(!response.ok){
+                if(!response.ok){   
                     return(
                         <>
                             <h1>Somethig Went Wrong Please try again later</h1>
                         </>
                     )
                 }
+
+                
                 const data = await response.json();
+                localStorage.setItem("home",JSON.stringify(data))
                 setImages(data.data);
                 setLoading(false)
             } catch (error) {
-                console.error('Error fetching images:', error);
+                console.warn("inside localsotrage")
+                if(localStorage.getItem("home")){
+                    const data = JSON.parse(localStorage.getItem("home"));
+                    
+                    setImages(data.data)
+                    setLoading(false)
+                    console.log("inside localsotrage",data)
+                }
+                // console.error('Error fetching images:', error);
             }
         };
 

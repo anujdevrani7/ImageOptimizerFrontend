@@ -11,10 +11,18 @@ function Services() {
               setLoading(true)
               const response = await fetch('http://localhost:7000/getimages/services');
               const data = await response.json();
+              localStorage.setItem("services",JSON.stringify(data))
               setImages(data.data);
               setLoading(false)
           } catch (error) {
-              console.error('Error fetching images:', error);
+
+            if(localStorage.getItem("services")){
+                const data = JSON.parse(localStorage.getItem("services"));
+                setImages(data.data)
+                setLoading(false)
+                console.log("inside localsotrage",data)
+            }
+            //   console.error('Error fetching images:', error);
           }
       };
 
