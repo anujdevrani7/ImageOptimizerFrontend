@@ -16,29 +16,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '22'  # Change this to your required Node.js version
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build the application
-      run: npm run build  # Adjust this command based on your build script
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: build
-        path: ./build  # Adjust this path to match your build output
-
-    - name: Download artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: build
-        path: ./build
-
     - name: Prepare SSH key
       uses: webfactory/ssh-agent@v0.5.4
       with:
@@ -46,9 +23,4 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-        scp -r ./build/* ec2-user@your-ec2-public-ip:/path/to/your/deployment/directory
-        ssh ec2-user@your-ec2-public-ip 'bash -s' < ./scripts/deploy.sh
-
-    - name: Restart EC2 application
-      run: |
-        ssh ec2-user@your-ec2-public-ip 'sudo systemctl restart your-app-service'
+        scp -r ./src/* ubuntu@3.22.119.230:/home/ubuntu/abhi
