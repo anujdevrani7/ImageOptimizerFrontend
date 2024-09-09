@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 function About() {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false)
+    // checking pipeline 
 
     useEffect(() => {
         const fetchImages = async () => {
